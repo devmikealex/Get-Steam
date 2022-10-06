@@ -26,6 +26,7 @@ app.get("/game/:id", (req, res) => {
 
     if (gameID==='0') {
         console.log('ZERO');
+        res.send('ZERO Game')
         return
     }
     

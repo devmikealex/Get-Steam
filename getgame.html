@@ -11,6 +11,7 @@
         <label for="game-id">Steam Game ID:</label>
         <input type="text" id="game-id" name="game-id" placeholder="275850">
         <input type="submit" value="Получить" onclick="openID(event)">
+        <input type="button" value="Очистить" onclick="clearInput('game-id')">
     </form>
     <div class="info" id="game-id-info">-</div>
     <br>
@@ -18,6 +19,8 @@
         <label for="game-link">Steam Game Link:</label>
         <input type="text" id="game-link" name="game-link" placeholder="https://store.steampowered.com/app/275850/No_Mans_Sky/">
         <input type="submit" value="Получить" onclick="openLink(event)">
+        <input type="button" value="Очистить" onclick="clearInput('game-link')">
+        <!-- <input type="button" value="Вставить" onclick="paste(event)"> -->
     </form>
     <div class="info" id="game-link-info">-</div>
 </body>
@@ -35,11 +38,26 @@
         e.preventDefault()
         const gameLink = document.getElementById('game-link').value
         if (gameLink) {
+            const gameID = getIDFromLink(gameLink)
+            document.getElementById('game-link-info').textContent = gameID
             window.location.href = `/game/${gameID}`
         } else {
             document.getElementById('game-link-info').textContent = 'Пустая ссылка'
         }
     }
+    function getIDFromLink(link) {
+        link = link.replace('https://store.steampowered.com/app/', '')
+        const slash = link.indexOf('/')
+        const id = link.slice(0, slash)
+        return id
+    }
+    function clearInput(id) {
+        document.getElementById(id).value = ''
+    }
+    // function paste(e) {
+    //     navigator.clipboard.readText().then(
+    //         clipText => e.target.innerText = clipText );
+    // }
 </script>
 <!-- <script src="./1.js"></script> -->
 </html>

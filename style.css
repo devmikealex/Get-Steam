@@ -28,9 +28,21 @@ h1 {
 label {
     display: block;
     margin-bottom: 10px;
+    outline: none;
 }
 
-input[type=submit] {
+input[type=text] {
+    padding: 4px;
+    border: none;
+    border-radius: 4px;
+    margin: 4px 0;
+}
+input[type=text]::placeholder {
+    color: rgb(164, 173, 179);
+}
+
+input[type=submit],
+input[type=button] {
     padding: 2px 8px;
     border: 0 none;
     cursor: pointer;
@@ -38,12 +50,13 @@ input[type=submit] {
 }
 
 #game-link {
-    width: 80%;
+    width: 70%;
+    max-width: 600px;
 }
 
 .info {
     color: #768b93;
-    margin: 10px 0;
+    margin: 4px 0;
 }
 
 
