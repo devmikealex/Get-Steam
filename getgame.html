@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Get Steam REVIEW</title>
+</head>
+<body>
+    <form>
+        <label for="game-id">Steam Game ID:</label>
+        <input type="text" id="game-id" name="game-id" placeholder="275850">
+        <input type="submit" value="Получить" onclick="openID(event)">
+    </form>
+    <div class="info" id="game-id-info">-</div>
+    <br>
+    <form>
+        <label for="game-link">Steam Game Link:</label>
+        <input type="text" id="game-link" name="game-link" placeholder="https://store.steampowered.com/app/275850/No_Mans_Sky/">
+        <input type="submit" value="Получить" onclick="openLink(event)">
+    </form>
+    <div class="info" id="game-link-info">-</div>
+</body>
+<script>
+    function openID(e) {
+        e.preventDefault()
+        const gameID = document.getElementById('game-id').value
+        if (gameID) {
+            window.location.href = `/game/${gameID}`
+        } else {
+            document.getElementById('game-id-info').textContent = 'Пустой ID'
+        }
+    }
+    function openLink(e) {
+        e.preventDefault()
+        const gameLink = document.getElementById('game-link').value
+        if (gameLink) {
+            window.location.href = `/game/${gameID}`
+        } else {
+            document.getElementById('game-link-info').textContent = 'Пустая ссылка'
+        }
+    }
+</script>
+<!-- <script src="./1.js"></script> -->
+</html>

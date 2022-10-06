@@ -1,0 +1,131 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background: #1b2838;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #c6d4df;
+    font-size: 20px;
+    padding: 30px;
+}
+
+a {
+    text-decoration: none;
+    color: #75808a;
+}
+
+a:hover {
+    color: #c1dbf4;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type=submit] {
+    padding: 2px 8px;
+    border: 0 none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#game-link {
+    width: 80%;
+}
+
+.info {
+    color: #768b93;
+    margin: 10px 0;
+}
+
+
+div.leftcol {
+    width: 700px;
+    /* margin: 0 auto; */
+    float: left;
+}
+
+.user_reviews_sub_header {
+    margin-bottom: 30px;
+    font-size: 30px;
+}
+
+div.rightcol {
+    width: 308px;
+    margin-left: 14px;
+    float: right;
+}
+
+.review_box {
+    background-color: rgba(0, 0, 0, 0.2);
+    margin-bottom: 26px;
+}
+
+.review_box .leftcol {
+    width: 184px;
+    float: left;
+    padding: 8px;
+    padding-left: 20px;
+    opacity: 0.6;
+}
+
+.review_box .rightcol {
+    float: left;
+    width: 675px;
+    position: relative;
+}
+
+.review_box .postedDate {
+    margin: 0px 0px 8px;
+    font-size: 10px;
+    text-transform: uppercase;
+    font-style: normal;
+    color: #8091a2;
+    display: inline-block;
+    opacity: 0.6;
+}
+
+.review_box .content {
+    font-size: 20px;
+    line-height: 28px;
+    background-color: #9cb3bc;
+    color: #0e2d45;
+    padding: 20px;
+}
+
+.vote_info {
+    padding: 0px 9px 8px 0px;
+    font-size: 12px;
+    color: #647580;
+    background-color: rgba(0, 0, 0, 0.2);
+    min-height: 16px;
+}
+
+.commentCount,
+.recommendation_row .vote_info .commentCount {
+    float: right;
+}
+
+.persona_name {
+    overflow: hidden;
+}
+
+.commentCount,
+.review_award,
+.review_source,
+.view_more,
+.thumb,
+.responsive_purchase_source,
+.control_block,
+.num_owned_games,
+.num_reviews {
+    display: none;
+}
