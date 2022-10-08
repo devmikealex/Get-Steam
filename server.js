@@ -1,3 +1,5 @@
+const clc = require('cli-color');
+
 const express = require("express")
 const bodyParser = require('body-parser')
 
@@ -13,7 +15,7 @@ const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch
 const PORT = process.env.PORT || 3000
 
 app.use((req,res,next) => {
-    console.log('---middleware -', req.method, req.originalUrl)
+    console.log(clc.magentaBright('---middleware:'), clc.green(req.method), req.originalUrl)
     next()
 })
 
@@ -28,8 +30,8 @@ app.post("/", (req, res) => {
 })
 
 app.get("/game/:id", (req, res) => {
-    console.log('GAME: ', req.params)
-    console.log('QUERY: ', req.query)
+    console.log(clc.cyanBright('GAME:'), req.params)
+    console.log(clc.cyanBright('QUERY:'), req.query)
     const gameID = req.params.id
     const cursor = req.query.cursor || '*';
 
@@ -45,7 +47,7 @@ app.get("/game/:id", (req, res) => {
         const gameInfo = await responseGI.json()
         // console.log('gameInfo:', JSON.stringify(gameInfo));
         if (JSON.stringify(gameInfo).includes('"success":false')) {
-            console.log('Game not found')
+            console.log(clc.redBright('Game not found'))
             res.send('Game not found')
             return
         } 
@@ -53,15 +55,15 @@ app.get("/game/:id", (req, res) => {
         // console.log(Object.hasOwn(gameInfo, 'data'))
         // console.log(Object.hasOwn(gameInfo, 'name'))
         const gameName = gameInfo[gameID].data.name
-        console.log('Name:', gameName);
+        console.log(clc.cyanBright('Name:'), gameName);
 
         const playtimemin = req.query.playtimemin || 10
 
         const url = `https://store.steampowered.com/appreviews/${gameID}?cursor=${cursor}&day_range=30&start_date=-1&end_date=-1&date_range_type=all&filter=recent&language=russian&l=russian&review_type=negative&purchase_type=all&playtime_filter_min=${playtimemin}&playtime_filter_max=0&filter_offtopic_activity=1`
-        console.log("URLrev:", url)
+        console.log(clc.cyanBright("URLrev: ") + clc.yellowBright(url))
         const response = await fetch(url)
         const data = await response.json()
-        console.log('Data:', data.html.slice(0,50))
+        // console.log('Data:', data.html.slice(0,50))
 
         const content = fs.readFileSync('template.html', 'utf8')
         let newContent = content.replace('file:///AAAAAAA', '/style.css')
@@ -71,6 +73,7 @@ app.get("/game/:id", (req, res) => {
         newContent = newContent.replace('XXXXXX', data.html)
 
         res.send(newContent)
+        console.log();
     })()
 })
 
@@ -79,5 +82,6 @@ app.get("/game/:id", (req, res) => {
 // })
 
 app.listen(PORT, () => {
-    console.log(`Start server http://127.0.0.1:${PORT}/getgame.html`);
+    console.log();
+    console.log('Start server ' + clc.yellowBright(`http://127.0.0.1:${PORT}/getgame.html`))
 });
