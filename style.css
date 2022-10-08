@@ -24,6 +24,10 @@ a:hover {
     color: #c1dbf4;
 }
 
+hr {
+    margin: 10px 0;
+}
+
 h1 {
     margin-bottom: 20px;
 }
@@ -35,13 +39,23 @@ label {
     outline: none;
 }
 
-input[type=text] {
+/* input[type=text] {
     padding: 4px;
     border: none;
     border-radius: 4px;
     margin: 4px 0;
 }
 input[type=text]::placeholder {
+    color: rgb(164, 173, 179);
+} */
+
+input{
+    padding: 4px;
+    border: none;
+    border-radius: 4px;
+    margin: 4px 0;
+}
+input::placeholder {
     color: rgb(164, 173, 179);
 }
 

@@ -55,7 +55,10 @@ app.get("/game/:id", (req, res) => {
         const gameName = gameInfo[gameID].data.name
         console.log('Name:', gameName);
 
-        const url = `https://store.steampowered.com/appreviews/${gameID}?cursor=${cursor}&day_range=30&start_date=-1&end_date=-1&date_range_type=all&filter=recent&language=russian&l=russian&review_type=negative&purchase_type=all&playtime_filter_min=10&playtime_filter_max=0&filter_offtopic_activity=1`
+        const playtimemin = req.query.playtimemin || 10
+
+        const url = `https://store.steampowered.com/appreviews/${gameID}?cursor=${cursor}&day_range=30&start_date=-1&end_date=-1&date_range_type=all&filter=recent&language=russian&l=russian&review_type=negative&purchase_type=all&playtime_filter_min=${playtimemin}&playtime_filter_max=0&filter_offtopic_activity=1`
+        console.log("URLrev:", url)
         const response = await fetch(url)
         const data = await response.json()
         console.log('Data:', data.html.slice(0,50))

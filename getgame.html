@@ -34,6 +34,9 @@
         <!-- <input type="button" value="Вставить" onclick="paste(event)"> -->
     </form>
     <div class="info" id="game-link-info">-</div>
+    <hr>
+    <div class="info">playtime_filter_min</div>
+    <input type="number" id="playtime_filter_min" value="10">
 
 <script>
     function openID(e) {
@@ -45,8 +48,9 @@
             document.getElementById('game-id-info').textContent = 'Пустой ID'
         }
     }
-    function goToLink(gameID, ) {
-        window.location.href = `/game/${gameID}`
+    function goToLink(gameID, playtime_filter_min) {
+        playtime_filter_min = document.getElementById('playtime_filter_min').value
+        window.location.href = `/game/${gameID}?playtimemin=${playtime_filter_min}`
     }
     function openLink(e) {
         e.preventDefault()
