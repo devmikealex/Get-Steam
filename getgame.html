@@ -1,38 +1,52 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Get Steam REVIEW</title>
 </head>
+
 <body>
+    <div class="logo">
+        <a href="https://store.steampowered.com/" target="_blank" rel="noopener noreferrer">
+            <img width="200px" src="https://store.akamai.steamstatic.com/public/shared/images/header/logo_steam.svg"
+                alt="">
+        </a>
+        <h2>Получить свежие негативные обзоры</h2>
+    </div>
     <form>
         <label for="game-id">Steam Game ID:</label>
         <input type="text" id="game-id" name="game-id" placeholder="275850">
         <input type="submit" value="Получить" onclick="openID(event)">
         <input type="button" value="Очистить" onclick="clearInput('game-id')">
+        <input type="button" value="test" onclick="testPost()">
     </form>
     <div class="info" id="game-id-info">-</div>
     <br>
     <form>
         <label for="game-link">Steam Game Link:</label>
-        <input type="text" id="game-link" name="game-link" placeholder="https://store.steampowered.com/app/275850/No_Mans_Sky/">
+        <input type="text" id="game-link" name="game-link"
+            placeholder="https://store.steampowered.com/app/275850/No_Mans_Sky/">
         <input type="submit" value="Получить" onclick="openLink(event)">
         <input type="button" value="Очистить" onclick="clearInput('game-link')">
         <!-- <input type="button" value="Вставить" onclick="paste(event)"> -->
     </form>
     <div class="info" id="game-link-info">-</div>
-</body>
+
 <script>
     function openID(e) {
         e.preventDefault()
         const gameID = document.getElementById('game-id').value
         if (gameID) {
-            window.location.href = `/game/${gameID}`
+            goToLink(gameID)
         } else {
             document.getElementById('game-id-info').textContent = 'Пустой ID'
         }
+    }
+    function goToLink(gameID, ) {
+        window.location.href = `/game/${gameID}`
     }
     function openLink(e) {
         e.preventDefault()
@@ -40,19 +54,41 @@
         if (gameLink) {
             const gameID = getIDFromLink(gameLink)
             document.getElementById('game-link-info').textContent = gameID
-            window.location.href = `/game/${gameID}`
+            goToLink(gameID)
         } else {
             document.getElementById('game-link-info').textContent = 'Пустая ссылка'
         }
     }
+
     function getIDFromLink(link) {
         link = link.replace('https://store.steampowered.com/app/', '')
         const slash = link.indexOf('/')
         const id = link.slice(0, slash)
         return id
     }
+
     function clearInput(id) {
         document.getElementById(id).value = ''
+    }
+
+    function testPost() {
+        (async () => {
+            const rawResponse = await fetch('http://127.0.0.1:3000/', {
+                method: 'POST',
+                headers: {
+                    // 'Accept': 'application/json',
+                    // 'Accept': 'text/plain',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    a: 1,
+                    b: 'Textual content'
+                })
+            });
+            const content = await rawResponse.text();
+            console.log("RESPONSE", content);
+            document.getElementById('game-id-info').textContent = content
+        })();
     }
     // function paste(e) {
     //     navigator.clipboard.readText().then(
@@ -60,4 +96,5 @@
     // }
 </script>
 <!-- <script src="./1.js"></script> -->
+</body>
 </html>

@@ -10,6 +10,10 @@ body {
     font-size: 20px;
     padding: 30px;
 }
+.logo {
+    padding: 20px;
+    text-align: center;
+}
 
 a {
     text-decoration: none;

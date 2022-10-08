@@ -1,5 +1,11 @@
 const express = require("express")
+const bodyParser = require('body-parser')
+
 const app = express()
+// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+// app.use(bodyParser.text());
+
 // const path = require("path")
 const fs = require('fs')
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
@@ -7,15 +13,18 @@ const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch
 const PORT = process.env.PORT || 3000
 
 app.use((req,res,next) => {
-    console.log('middleware - ', req.method, req.originalUrl)
+    console.log('---middleware -', req.method, req.originalUrl)
     next()
 })
 
 app.use(express.static('.'))
 
 app.get("/", (req, res) => {
-    // res.send("Root folder")
     res.redirect("getgame.html")
+})
+app.post("/", (req, res) => {
+    console.log('POST', req.body);
+    res.status(200).send('ooOKkk')
 })
 
 app.get("/game/:id", (req, res) => {
