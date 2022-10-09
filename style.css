@@ -1,6 +1,7 @@
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -29,11 +30,12 @@ hr {
 }
 
 h1 {
-    margin-bottom: 20px;
+    margin: 10px 0;
+    /* margin-bottom: 20px; */
 }
 
 
-label {
+label, .info {
     display: block;
     margin-bottom: 10px;
     outline: none;
@@ -50,7 +52,8 @@ input[type=text]::placeholder {
 } */
 
 input{
-    padding: 4px;
+    padding: 0 10px;
+    height: 2em;
     border: none;
     border-radius: 4px;
     margin: 4px 0;
@@ -61,10 +64,8 @@ input::placeholder {
 
 input[type=submit],
 input[type=button] {
-    padding: 2px 8px;
-    border: 0 none;
+    /* padding: 2px 8px; */
     cursor: pointer;
-    border-radius: 4px;
 }
 
 #game-link {
@@ -73,26 +74,30 @@ input[type=button] {
 }
 
 .info {
-    color: #768b93;
-    margin: 4px 0;
+    /* color: #768b93; */
+    /* margin: 4px 0; */
 }
 
 
-div.leftcol {
-    width: 700px;
-    /* margin: 0 auto; */
-    float: left;
-}
+
 
 .user_reviews_sub_header {
     margin-bottom: 30px;
     font-size: 30px;
 }
-
+/* div.leftcol {
+    width: 700px;
+    float: left;
+}
 div.rightcol {
     width: 308px;
     margin-left: 14px;
     float: right;
+} */
+
+#root {
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .review_box {
@@ -101,27 +106,32 @@ div.rightcol {
 }
 
 .review_box .leftcol {
-    width: 184px;
-    float: left;
-    padding: 8px;
-    padding-left: 20px;
+    /* width: 184px; */
+    /* float: left; */
+    padding: 6px 0;
+    margin-left: 14px;
+    /* padding-left: 20px; */
     opacity: 0.6;
+    display: flex;
+    /* flex-direction: column; */
 }
 
 .review_box .rightcol {
-    float: left;
-    width: 675px;
+    /* float: left; */
+    /* width: 675px; */
+    margin-left: 14px;
+    margin-right: 14px;
     position: relative;
 }
 
 .review_box .postedDate {
-    margin: 0px 0px 8px;
-    font-size: 10px;
-    text-transform: uppercase;
+    /* margin: 0px 0px 8px; */
+    /* font-size: 10px; */
+    /* text-transform: uppercase; */
     font-style: normal;
     color: #8091a2;
     display: inline-block;
-    opacity: 0.6;
+    /* opacity: 0.8; */
 }
 
 .review_box .content {
@@ -130,14 +140,21 @@ div.rightcol {
     background-color: #9cb3bc;
     color: #0e2d45;
     padding: 20px;
+    margin-top: 6px;
+    /* width: 95%; */
+    transition: background-color 0.5s;
+}
+.review_box .content:hover {
+    background-color: #bed5de;
 }
 
 .vote_info {
-    padding: 0px 9px 8px 0px;
-    font-size: 12px;
+    /* padding: 0px 9px 8px 0px; */
+    padding: 4px;
+    font-size: 10px;
     color: #647580;
-    background-color: rgba(0, 0, 0, 0.2);
-    min-height: 16px;
+    /* background-color: rgba(0, 0, 0, 0.2); */
+    /* min-height: 16px; */
 }
 
 .commentCount,
@@ -147,8 +164,18 @@ div.rightcol {
 
 .persona_name {
     overflow: hidden;
+    /* margin-left: 8px; */
+}
+.hours.ellipsis {
+    display: inline;
+    color: rgb(42, 187, 255);
 }
 
+
+.avatar,
+.responsive_review_leftcol_ctn,
+.title.ellipsis,
+.posted,
 .commentCount,
 .review_award,
 .review_source,
