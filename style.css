@@ -44,10 +44,14 @@ h1 {
     color: white;
 }
 
-label, .info {
+label, .info, .title {
     display: block;
     margin-bottom: 2px;
     outline: none;
+}
+.info {
+    color: #647580;
+    margin-bottom: 10px;
 }
 
 /* input[type=text] {

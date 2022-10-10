@@ -14,7 +14,7 @@
             <img width="200px" src="https://store.akamai.steamstatic.com/public/shared/images/header/logo_steam.svg"
                 alt="">
         </a>
-        <h2>Получить свежие негативные обзоры</h2>
+        <h3>Получить свежие негативные обзоры</h3>
     </div>
     <form>
         <label for="game-id">Steam Game ID:</label>
@@ -23,7 +23,7 @@
         <input type="button" value="Очистить" onclick="clearInput('game-id')">
         <input type="button" value="test" onclick="testPost()">
     </form>
-    <div class="info" id="game-id-info">-</div>
+    <div class="info" id="game-id-info"></div>
     <form>
         <label for="game-link">Steam Game Link:</label>
         <input type="text" id="game-link" name="game-link"
@@ -32,7 +32,7 @@
         <input type="button" value="Очистить" onclick="clearInput('game-link')">
         <!-- <input type="button" value="Вставить" onclick="paste(event)"> -->
     </form>
-    <div class="info" id="game-link-info">-</div>
+    <div class="info" id="game-link-info"></div>
     <form>
         <label for="game-search">Искать игру:</label>
         <input type="text" id="game-search" name="game-search" placeholder="The Riftbreaker">
@@ -42,15 +42,24 @@
     </form>
     <div id="games-list"></div>
     <hr>
-    <div class="info">Минимальное время игры (playtime_filter_min)</div>
-    <input type="number" id="playtime_filter_min" value="10">
+    <div class="title">Минимальное время игры (playtime_filter_min)</div>
+    <input type="number" id="playtime_filter_min" value="10" size="4">
 
 <script>
+    function searchMessage(text, classM) {
+        const e = document.createElement('span')
+        e.textContent = text
+        e.className = classM
+        document.getElementById('games-list').append(e)
+    }
     function searchGame(e) {
         e.preventDefault()
+        const list = document.getElementById('games-list')
+        list.textContent = ''
         let gameSearch = document.getElementById('game-search').value.trim()
         if (!gameSearch) {
             console.log('Пусто');
+            searchMessage('Введите название игры', 'info')
             return
         }
         gameSearch = gameSearch.toLowerCase()
@@ -66,15 +75,23 @@
                     return name.includes(gameSearch)
                 })
                 // console.log(newAr);
-                const list = document.getElementById('games-list')
-                list.textContent = ''
-                newAr.forEach(element => {
-                    const e = document.createElement('div')
-                    e.classList.add('games-list-item')
-                    e.textContent = `${element.name} - ${element.appid}`
-                    list.append(e)
-                    e.addEventListener('click', () => gameIDtoInput(element.appid))
-                });
+                
+                // list.textContent = ''
+                if (newAr.length) {
+                    newAr.forEach(element => {
+                        const e = document.createElement('div')
+                        e.classList.add('games-list-item')
+                        e.textContent = `${element.name} - ${element.appid}`
+                        list.append(e)
+                        e.addEventListener('click', () => gameIDtoInput(element.appid))
+                    });
+                } else {
+                    // const e = document.createElement('span')
+                    // e.textContent = ''
+                    // e.className = 'info'
+                    // document.getElementById('games-list').append(e)
+                    searchMessage('Не найдено', 'info')
+                }
             })
     }
 
