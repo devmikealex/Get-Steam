@@ -24,7 +24,6 @@
         <input type="button" value="test" onclick="testPost()">
     </form>
     <div class="info" id="game-id-info">-</div>
-    <br>
     <form>
         <label for="game-link">Steam Game Link:</label>
         <input type="text" id="game-link" name="game-link"
@@ -34,15 +33,59 @@
         <!-- <input type="button" value="Вставить" onclick="paste(event)"> -->
     </form>
     <div class="info" id="game-link-info">-</div>
-    <br>
+    <form>
+        <label for="game-search">Искать игру:</label>
+        <input type="text" id="game-search" name="game-search" placeholder="The Riftbreaker">
+        <input type="submit" value="Поиск" onclick="searchGame(event)">
+        <input type="button" value="Очистить" onclick="clearInput('game-search')">
+        <!-- <input type="button" value="Вставить" onclick="paste(event)"> -->
+    </form>
+    <div id="games-list"></div>
     <hr>
-    <div class="info">playtime_filter_min</div>
+    <div class="info">Минимальное время игры (playtime_filter_min)</div>
     <input type="number" id="playtime_filter_min" value="10">
 
 <script>
+    function searchGame(e) {
+        e.preventDefault()
+        let gameSearch = document.getElementById('game-search').value.trim()
+        if (!gameSearch) {
+            console.log('Пусто');
+            return
+        }
+        gameSearch = gameSearch.toLowerCase()
+        fetch("api.steampowered.com.json")
+            .then(response => response.json())
+            .then(games => {
+                // console.log(games.applist.apps)
+                games = games.applist.apps
+                
+                // games = games.slice(0, 50)
+                const newAr = games.filter(item => {
+                    const name = item.name.toLowerCase()
+                    return name.includes(gameSearch)
+                })
+                // console.log(newAr);
+                const list = document.getElementById('games-list')
+                list.textContent = ''
+                newAr.forEach(element => {
+                    const e = document.createElement('div')
+                    e.classList.add('games-list-item')
+                    e.textContent = `${element.name} - ${element.appid}`
+                    list.append(e)
+                    e.addEventListener('click', () => gameIDtoInput(element.appid))
+                });
+            })
+    }
+
+    function gameIDtoInput(id) {
+        console.log(id);
+        goToLink(id)
+    }
+
     function openID(e) {
         e.preventDefault()
-        const gameID = document.getElementById('game-id').value
+        const gameID = document.getElementById('game-id').value.trim()
         if (gameID) {
             goToLink(gameID)
         } else {
@@ -50,12 +93,12 @@
         }
     }
     function goToLink(gameID, playtime_filter_min) {
-        playtime_filter_min = document.getElementById('playtime_filter_min').value
+        playtime_filter_min = document.getElementById('playtime_filter_min').value.trim()
         window.location.href = `/game/${gameID}?playtimemin=${playtime_filter_min}`
     }
     function openLink(e) {
         e.preventDefault()
-        const gameLink = document.getElementById('game-link').value
+        const gameLink = document.getElementById('game-link').value.trim()
         if (gameLink) {
             const gameID = getIDFromLink(gameLink)
             document.getElementById('game-link-info').textContent = gameID

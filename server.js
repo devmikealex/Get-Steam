@@ -68,7 +68,7 @@ app.get("/game/:id", (req, res) => {
         const content = fs.readFileSync('template.html', 'utf8')
         let newContent = content.replace('file:///AAAAAAA', '/style.css')
         newContent = newContent.replace('Steam REVIEW', gameName + ' - Neg REVIEW')
-        const titleLink = `<a href="https://store.steampowered.com/app/${gameID}" target="_blank" rel="noopener noreferrer">${gameName}</a>`
+        const titleLink = `<a href="https://store.steampowered.com/app/${gameID}" target="_blank" rel="noopener noreferrer">${gameName} - ${gameID}</a>`
         newContent = newContent.replace('WWWWWW', titleLink)
         newContent = newContent.replace('XXXXXX', data.html)
 
