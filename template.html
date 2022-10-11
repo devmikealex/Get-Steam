@@ -16,7 +16,9 @@
 <script>
     function LoadMoreReviews(gameID, newCursor) {
         // console.log("🚀 newCursor =", newCursor)
-        window.location.href = `/game/${gameID}?cursor=${newCursor}`
+        const urlParams = new URLSearchParams(window.location.search);
+        const playtime_filter_min = urlParams.get('playtimemin') || 10
+        window.location.href = `/game/${gameID}?playtimemin=${playtime_filter_min}&cursor=${newCursor}`
     }
 </script>
 </html>
