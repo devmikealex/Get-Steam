@@ -1,18 +1,18 @@
-const clc = require('cli-color');
+import clc from "cli-color"
+import clipboardy from 'clipboardy'
+import express from "express"
+import bodyParser from "body-parser"
+import fs from "fs"
+// const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+import fetch from "node-fetch"
 
-const express = require("express")
-const bodyParser = require('body-parser')
+
+const PORT = process.env.PORT || 3000
 
 const app = express()
 // app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // app.use(bodyParser.text());
-
-// const path = require("path")
-const fs = require('fs')
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
-
-const PORT = process.env.PORT || 3000
 
 app.use((req,res,next) => {
     console.log(clc.magentaBright('---middleware:'), clc.green(req.method), req.originalUrl)
@@ -25,8 +25,28 @@ app.get("/", (req, res) => {
     res.redirect("getgame.html")
 })
 app.post("/", (req, res) => {
-    console.log('POST', req.body);
+    console.log('POST', req.body)
     res.status(200).send('ooOKkk')
+})
+
+app.get("/clipboard", (req, res) => {
+    const clip = clipboardy.readSync().trim()
+    console.log(clc.greenBright('Clipboard Read:'), clip)
+    if (clip.includes('store.steampowered.com/app')) {
+        const newLink = `/game/${getIDFromLink(clip)}?playtimemin=10`
+        console.log('Link:', clc.yellowBright(newLink))
+        res.redirect(newLink)
+    } else {
+        console.log(clc.redBright('Bad Clipboard'))
+        res.send('Bad Clipboard')
+    }
+
+    function getIDFromLink(link) {
+        link = link.replace('https://store.steampowered.com/app/', '')
+        const slash = link.indexOf('/')
+        const id = link.slice(0, slash)
+        return id
+    }
 })
 
 app.get("/game/:id", (req, res) => {
@@ -83,5 +103,7 @@ app.get("/game/:id", (req, res) => {
 
 app.listen(PORT, () => {
     console.log();
-    console.log('Start server ' + clc.yellowBright(`http://127.0.0.1:${PORT}/getgame.html`))
+    console.log('Start server')
+    console.log(clc.yellowBright(`http://127.0.0.1:${PORT}/getgame.html`))
+    console.log(clc.yellowBright(`http://127.0.0.1:${PORT}/clipboard`))
 });

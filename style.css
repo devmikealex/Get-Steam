@@ -172,6 +172,11 @@ div.rightcol {
     background-color: #bed5de;
 }
 
+.review_box .content br {
+    margin: 8px;
+    display: block;
+}
+
 .vote_info {
     /* padding: 0px 9px 8px 0px; */
     padding: 4px;
