@@ -7,8 +7,15 @@
     <title>Steam REVIEW</title>
 </head>
 <body>
+    <div class="sticky">
+        <a href="/getgame.html">На главную</a>
+        <!-- <form> -->
+            <input type="text" id="game-link" name="game-link"
+                placeholder="https://store.steampowered.com/app/275850/No_Mans_Sky/">
+            <input type="submit" value="Получить" onclick="openLink(event)">
+        <!-- </form> -->
+    </div>
     <div id="root">
-        <div><a href="/getgame.html">На главную</a></div>
         <h1>WWWWWW<br>Не рекомендую</h1>
         XXXXXX
     </div>
@@ -19,6 +26,23 @@
         const urlParams = new URLSearchParams(window.location.search);
         const playtime_filter_min = urlParams.get('playtimemin') || 10
         window.location.href = `/game/${gameID}?playtimemin=${playtime_filter_min}&cursor=${newCursor}`
+    }
+    function openLink(e) {
+        e.preventDefault()
+        const gameLink = document.getElementById('game-link').value.trim()
+        if (gameLink) {
+            const gameID = getIDFromLink(gameLink)
+            goToLink(gameID, 10)
+        }
+    }
+    function goToLink(gameID, playtime_filter_min) {
+        window.location.href = `/game/${gameID}?playtimemin=${playtime_filter_min}`
+    }
+    function getIDFromLink(link) {
+        link = link.replace('https://store.steampowered.com/app/', '')
+        const slash = link.indexOf('/')
+        const id = link.slice(0, slash)
+        return id
     }
 </script>
 </html>

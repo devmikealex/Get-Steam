@@ -54,6 +54,17 @@ label, .info, .title {
     margin-bottom: 10px;
 }
 
+.sticky {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    background-color: #1b2838;
+    text-align: center;
+    padding: 2px;
+}
+
 /* input[type=text] {
     padding: 4px;
     border: none;
@@ -152,7 +163,7 @@ div.rightcol {
     line-height: 28px;
     background-color: #9cb3bc;
     color: #0e2d45;
-    padding: 20px;
+    padding: 30px;
     margin-top: 6px;
     /* width: 95%; */
     transition: background-color 0.5s;
