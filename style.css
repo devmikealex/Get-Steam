@@ -199,6 +199,14 @@ div.rightcol {
     display: inline;
     color: rgb(42, 187, 255);
 }
+blockquote.bb_blockquote {
+    border: 1px solid #56707f;
+    border-radius: 3px;
+    padding: 12px;
+    margin: 8px;
+    display: table;
+    word-break: break-word;
+}
 
 
 .avatar,

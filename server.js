@@ -104,6 +104,7 @@ app.get("/game/:id", (req, res) => {
 app.listen(PORT, () => {
     console.log();
     console.log('Start server')
+    console.log('Working Dir:', process.cwd());
     console.log(clc.yellowBright(`http://127.0.0.1:${PORT}/getgame.html`))
     console.log(clc.yellowBright(`http://127.0.0.1:${PORT}/clipboard`))
 });
