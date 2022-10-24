@@ -1,0 +1,103 @@
+// out: "../style.css"
+
+@import "_vars.less";
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    background: #1b2838;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #c6d4df;
+    font-size: 20px;
+    padding: 30px;
+}
+input{
+    padding: 0 10px;
+    height: 2em;
+    border: none;
+    border-radius: 4px;
+    margin: 2px 0;
+
+    &::placeholder {
+        color: rgb(164, 173, 179);
+    }
+
+    &[type=submit],
+    &[type=button] {
+        cursor: pointer;
+    }
+}
+a {
+    text-decoration: none;
+    color: #75808a;
+
+    &:hover {
+        color: #c1dbf4;
+    }
+}
+h1, hr {
+    margin: 10px 0;
+}
+
+#root {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.logo {
+    padding: 14px;
+    text-align: center;
+}
+
+.review-header-inside {
+    margin: 0 10px;
+    display: inline;
+
+    #game-link {
+        max-width: 500px;
+    }
+}
+
+#games-list {
+    margin-top: 6px;
+}
+.games-list-item {
+    margin: 4px 0;
+    padding-left: 14px;
+
+    &:hover {
+        color: white;
+    }
+}
+
+label {
+    display: block;
+    margin-bottom: 2px;
+    outline: none;
+}
+.info {
+    &:extend(label);
+    color: #647580;
+    margin-bottom: 10px;
+}
+.title {
+    &:extend(label);
+}
+
+.sticky {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    background-color: #1b2838;
+    text-align: center;
+    padding: 2px;
+}
+
+
+@import "_steam.less"; 
