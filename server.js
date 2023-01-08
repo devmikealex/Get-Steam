@@ -100,6 +100,32 @@ app.get('/game/:id', (req, res) => {
     })()
 })
 
+app.get('/steamupdate', async (req, res) => {
+    try {
+        const newAppList = await fetch(
+            'http://api.steampowered.com/ISteamApps/GetAppList/v0002/?format=json'
+        )
+        const data = await newAppList.json()
+
+        console.log(clc.cyan(`OK: ${newAppList.ok} - STATUS: ${newAppList.status}`))
+        console.log(
+            clc.green(
+                `${newAppList.headers.get('content-length')} - ${newAppList.headers.get(
+                    'content-type'
+                )} - ${newAppList.headers.get('content-encoding')}`
+            )
+        )
+        const dataString = JSON.stringify(data)
+        console.log('DATA LENGTH:', dataString.length)
+
+        fs.writeFileSync('api.steampowered.com.json', dataString)
+        res.send(data)
+    } catch (error) {
+        console.error(clc.red(error.message))
+        res.status(500).send(error.message)
+    }
+})
+
 // app.get("/favicon.ico", (req, res) => {
 //     res.sendFile("favicon.ico", { root: '.' })
 // })
