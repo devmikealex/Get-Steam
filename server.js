@@ -56,7 +56,7 @@ app.get('/game/:id', (req, res) => {
     console.log(clc.cyanBright('GAME:'), req.params)
     console.log(clc.cyanBright('QUERY:'), req.query)
     const gameID = req.params.id
-    const cursor = req.query.cursor || '*'
+    const cursor = encodeURIComponent(req.query.cursor || '*')
 
     if (gameID === '0') {
         console.log('ZERO')

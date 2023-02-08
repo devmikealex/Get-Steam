@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="file:///AAAAAAA">
     <title>Steam REVIEW</title>
 </head>
+
 <body>
     <div class="sticky">
         <a href="/getgame.html">На главную</a>
         <!-- <form> -->
         <div class="review-header-inside">
             <input type="text" id="game-link" name="game-link"
-            placeholder="https://store.steampowered.com/app/275850/No_Mans_Sky/">
+                placeholder="https://store.steampowered.com/app/275850/No_Mans_Sky/">
             <input type="submit" value="Получить" onclick="openLink(event)">
         </div>
         <a href="/clipboard">Из буфера</a>
@@ -28,8 +30,10 @@
         // console.log("🚀 newCursor =", newCursor)
         const urlParams = new URLSearchParams(window.location.search);
         const playtime_filter_min = urlParams.get('playtimemin') || 10
+        newCursor = encodeURIComponent(newCursor)
         window.location.href = `/game/${gameID}?playtimemin=${playtime_filter_min}&cursor=${newCursor}`
     }
+
     function openLink(e) {
         e.preventDefault()
         const gameLink = document.getElementById('game-link').value.trim()
@@ -38,9 +42,11 @@
             goToLink(gameID, 10)
         }
     }
+
     function goToLink(gameID, playtime_filter_min) {
         window.location.href = `/game/${gameID}?playtimemin=${playtime_filter_min}`
     }
+
     function getIDFromLink(link) {
         link = link.replace('https://store.steampowered.com/app/', '')
         const slash = link.indexOf('/')
@@ -48,4 +54,5 @@
         return id
     }
 </script>
+
 </html>
